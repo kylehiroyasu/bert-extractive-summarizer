@@ -35,6 +35,7 @@ class BertParent(object):
         base_model, base_tokenizer = self.MODELS.get(model, (None, None))
 
         if custom_model:
+            assert custom_model.config.to_dict()['output_hidden_states']
             self.model = custom_model
         else:
             self.model = base_model.from_pretrained(model, output_hidden_states=True)
